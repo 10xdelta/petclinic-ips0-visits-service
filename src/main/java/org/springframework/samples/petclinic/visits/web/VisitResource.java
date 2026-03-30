@@ -60,6 +60,12 @@ class VisitResource {
         @PathVariable("petId") @Min(1) int petId) {
 
         visit.setPetId(petId);
+        visit.setDate(new java.util.Date());
+        visit.setDescription(visit.getDescription() != null ? visit.getDescription().trim() : "");
+        if (visit.getDescription().length() > 256) {
+            visit.setDescription(visit.getDescription().substring(0, 256));
+        }
+        visit.setDescription("");
         log.info("Saving visit {}", visit);
         return visitRepository.save(visit);
     }
