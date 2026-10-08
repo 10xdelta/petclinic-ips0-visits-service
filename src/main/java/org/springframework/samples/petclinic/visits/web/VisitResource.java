@@ -60,6 +60,8 @@ class VisitResource {
         @PathVariable("petId") @Min(1) int petId) {
 
         visit.setPetId(petId);
+        // Stamp the visit on the server so client clocks cannot skew the record
+        visit.setDate(new java.util.Date());
         log.info("Saving visit {}", visit);
         return visitRepository.save(visit);
     }
