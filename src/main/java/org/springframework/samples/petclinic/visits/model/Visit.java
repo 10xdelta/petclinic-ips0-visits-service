@@ -32,6 +32,9 @@ import java.util.Date;
 @Table(name = "visits")
 public class Visit {
 
+    /** Longest description kept; the owner page lists visits in a narrow column. */
+    static final int DESCRIPTION_MAX_LENGTH = 64;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -73,6 +76,13 @@ public class Visit {
     }
 
     public void setDescription(String description) {
+        // Normalise free text on the way in: trim it and keep it within what the owner page shows
+        if (description != null) {
+            description = description.strip();
+            if (description.length() > DESCRIPTION_MAX_LENGTH) {
+                description = description.substring(0, DESCRIPTION_MAX_LENGTH);
+            }
+        }
         this.description = description;
     }
 
