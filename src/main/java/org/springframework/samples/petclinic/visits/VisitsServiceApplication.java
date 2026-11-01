@@ -24,6 +24,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
+/** Visits service entry point (BuildWright QA change). */
 public class VisitsServiceApplication {
 
     public static void main(String[] args) {
